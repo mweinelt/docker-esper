@@ -1,24 +1,30 @@
 FROM debian:stretch
 
 RUN apt-get update && apt-get install -y \
-	make \
-	wget \
-	gcc g++ \
-	autoconf automake \
-	flex bison \
-	git \
-	unzip bzip2 \
-	libtool libtool-bin \
-	gperf \
-	texinfo help2man \
-	gawk sed \
-	ncurses-dev \ 
-	libexpat-dev \
-	python python-dev python-serial
+    locales \
+    make \
+    wget \
+    gcc g++ \
+    autoconf automake \
+    flex bison \
+    git \
+    unzip bzip2 \
+    libtool libtool-bin \
+    gperf \
+    texinfo help2man \
+    gawk sed \
+    ncurses-dev \ 
+    libexpat-dev \
+    python python-dev python-serial
+
+# Setup locale
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
 
 # Create user
 RUN useradd -m builder
 USER builder
+WORKDIR /home/builder
 
 # Install ESP8266 SDK
 RUN git clone --recursive https://github.com/pfalcon/esp-open-sdk.git /home/builder/esp-open-sdk \
@@ -53,5 +59,3 @@ RUN git clone https://github.com/SmingHub/Sming.git /home/builder/Sming \
     && cd /home/builder/Sming \
     && git reset --hard b0568b58db7d63d1078b29eea721554338932bc1
 RUN cd /home/builder/Sming/Sming; make clean; make
-
-USER root
