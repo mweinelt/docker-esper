@@ -59,3 +59,5 @@ RUN git clone https://github.com/SmingHub/Sming.git /home/builder/Sming \
     && cd /home/builder/Sming \
     && git reset --hard b0568b58db7d63d1078b29eea721554338932bc1
 RUN cd /home/builder/Sming/Sming; make clean; make
+
+USER root
