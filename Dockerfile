@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install -y \
     python python-dev python-serial
 
 # Setup locale
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
 
 # Create user
 RUN useradd -m builder
@@ -57,7 +57,7 @@ ENV PATH /home/builder/esptool2:$PATH
 # Install sming
 RUN git clone https://github.com/SmingHub/Sming.git /home/builder/Sming \
     && cd /home/builder/Sming \
-    && git reset --hard b0568b58db7d63d1078b29eea721554338932bc1
+    && git reset --hard bc0a8d3ec42c8847f3807ad6a90e44b3a85511b7
 RUN cd /home/builder/Sming/Sming; make clean; make
 
 USER root
